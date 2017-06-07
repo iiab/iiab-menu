@@ -11,6 +11,10 @@ if(typeof forceFullDisplay == 'undefined') { // allow override in index.html
 	forceFullDisplay = false;
 }
 
+if(typeof dynamicHtml == 'undefined') { // allow override in index.html
+	dynamicHtml = true;
+}
+
 // Ports used by services - not currently tied to xsce ansible
 var menuConfig = {};
 //menuConfig['kiwixPort'] = "3000";
@@ -66,21 +70,31 @@ var getZimVersions = $.getJSON(zimVersionIdx)
 zimVersions = data;})
 .fail(jsonErrhandler);
 
-$.when(scaffold, getZimVersions, getConfigJson).then(procMenu);
+// This is the main processing
+if (dynamicHtml){
+  $.when(scaffold, getZimVersions, getConfigJson).then(procMenu);
+  // create scaffolding for menu items
+  var html = "";
+  for (i = 0; i < menuItems.length; i++) {
+  	var menu_item_name = menuItems[i];
+  	menuDefs[menu_item_name] = {}
+  	menuItemDivId = i.toString() + "-" + menu_item_name;
+  	menuDefs[menu_item_name]['menu_id'] = menuItemDivId;
 
-// create scaffolding for menu items
-var html = "";
-for (i = 0; i < menuItems.length; i++) {
-	var menu_item_name = menuItems[i];
-	menuDefs[menu_item_name] = {}
-	menuItemDivId = i.toString() + "-" + menu_item_name;
-	menuDefs[menu_item_name]['menu_id'] = menuItemDivId;
-
-	html += '<div id="' + menuItemDivId + '" class="content-item" dir="auto">&emsp;Attempting to load ' + menu_item_name + ' </div>';
+  	html += '<div id="' + menuItemDivId + '" class="content-item" dir="auto">&emsp;Attempting to load ' + menu_item_name + ' </div>';
+  }
+  $("#content").html(html);
+  $(".toggleExtraHtml").toggle(showFullDisplay);
+  scaffold.resolve();
 }
-$("#content").html(html);
-$(".toggleExtraHtml").toggle(showFullDisplay);
-scaffold.resolve();
+else {
+  $('a[href*="##HOST##"]')
+    .each(function () {
+      hrefStr = $(this).attr('href');
+      hrefStr = hrefStr.replace(/##HOST##/g, window.location.host);
+      this.href = hrefStr;
+  });
+}
 
 // click function for full display toggle
 $( "#toggleFullDisplay" ).click(function() {
