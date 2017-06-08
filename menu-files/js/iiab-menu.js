@@ -15,7 +15,7 @@ if(typeof dynamicHtml == 'undefined') { // allow override in index.html
 	dynamicHtml = true;
 }
 
-// Ports used by services - not currently tied to xsce ansible
+// Ports used by services - not currently tied to iiab ansible
 var menuConfig = {};
 //menuConfig['kiwixPort'] = "3000";
 //menuConfig['kalitePort'] = "8008";
@@ -88,18 +88,23 @@ if (dynamicHtml){
   scaffold.resolve();
 }
 else {
-  $('a[href*="##HOST##"]')
-    .each(function () {
-      hrefStr = $(this).attr('href');
-      hrefStr = hrefStr.replace(/##HOST##/g, window.location.host);
-      this.href = hrefStr;
-  });
+  $.when(getConfigJson).then(procStatic);
 }
 
 // click function for full display toggle
 $( "#toggleFullDisplay" ).click(function() {
   $(".toggleExtraHtml").toggle();
 });
+
+function procStatic(){
+  $('a[href*="##HOST##"]')
+    .each(function () {
+      hrefStr = $(this).attr('href');
+      hrefStr = hrefStr.replace(/##HOST##/g, window.location.host);
+      this.href = hrefStr;
+  });
+  resizeHandler (); // if a mobile device set font-size for portrait or landscape
+}
 
 function procMenu() {
 	resizeHandler (); // if a mobile device set font-size for portrait or landscape
