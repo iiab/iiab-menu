@@ -31,6 +31,7 @@ var configJson = '/iiab-menu/config.json';
 var defUrl = menuUrl + 'menu-defs/';
 var imageUrl = menuUrl + 'images/';
 var menuServicesUrl =  menuUrl + 'services/';
+var iiabMeterUrl = "/iiab_meter.php"
 
 var host = 'http://' + window.location.hostname;
 var isMobile = detectMob();
@@ -104,6 +105,7 @@ function procStatic(){
       this.href = hrefStr;
   });
   resizeHandler (); // if a mobile device set font-size for portrait or landscape
+  $('a').click(iiabMeter);
 }
 
 function procMenu() {
@@ -310,20 +312,20 @@ function checkMenuDone(){
 	ajaxCallCount -= 1;
 	consoleLog (ajaxCallCount);
 	if (ajaxCallCount == 0){
-		$('a').click(trackUsage);
+		$('a').click(iiabMeter);
 		//alert ("menu done");
 	}
 }
 
-function trackUsage(event){
+function iiabMeter(event){
 	event.preventDefault();
-	//alert("in track usage");
+	//alert("in iiab meter");
 	var url = $(this).attr('href');
 	consoleLog (url);
 	$.ajax({
 		method: "GET",
 		async: true,
-		url: menuServicesUrl + "track_usage.php",
+		url: iiabMeterUrl,
 		dataType: 'html',
 		data: { link_clicked: url }
 	})

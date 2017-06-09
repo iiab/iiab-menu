@@ -1,0 +1,63 @@
+#!/bin/bash
+
+WWWROOT=/var/www/html
+if [ -f /etc/xsce/xsce.env ]; then
+  source /etc/xsce/xsce.env
+fi
+
+MENUDIR=$WWWROOT/iiab-menu
+mkdir -p $MENUDIR
+
+mkdir -p $MENUDIR/local/menu-defs
+mkdir -p $MENUDIR/local/html
+
+# copy changed files to local if this is not the first time
+if [ -f $MENUDIR/menu-defs.lst ]; then
+  # record timestamp and size of changed set of files
+  TZ=utc ls -l --time-style=full-iso $MENUDIR/menu-files/menu-defs/*.{json,html} |awk '{print $5" "$6":"$7" "$9}' >$MENUDIR/changed-menu-defs.lst
+  TZ=utc ls -l --time-style=full-iso $MENUDIR/menu-files/html/*.html |awk '{print $5" "$6":"$7" "$9}' >$MENUDIR/changed-html.lst
+  ./bu-local $MENUDIR
+fi
+
+rsync -av common $WWWROOT
+rsync -av menu-files $MENUDIR
+rsync -av samples $MENUDIR
+
+# copy iiab-meter service to web root
+cp -f menu-files/services/iiab_meter.php $WWWROOT
+
+# copy config file if none exists
+if [ ! -e $MENUDIR/config.json ]; then
+    cp config.json $MENUDIR
+fi
+
+# copy sample index file if none exists
+if [ ! -e $MENUDIR/index.html ]; then
+    cp samples/sampler.html $MENUDIR/index.html
+fi
+
+# copy sample index file if none exists in home
+if [ ! -e $WWWROOT/home/index.html ]; then
+    cp samples/sampler.html $WWWROOT/home/index.html
+fi
+
+# restore modified files from local
+cp -rf $MENUDIR/local/* $MENUDIR/menu-files
+
+echo 'files copied'
+
+# record timestamp and size of current set of files
+TZ=utc ls -l --time-style=full-iso $MENUDIR/menu-files/menu-defs/*.{json,html} |awk '{print $5" "$6":"$7" "$9}' >$MENUDIR/menu-defs.lst
+TZ=utc ls -l --time-style=full-iso $MENUDIR/menu-files/html/*.html |awk '{print $5" "$6":"$7" "$9}' >$MENUDIR/html.lst
+
+# Check for user and create if absent
+rc=`mysql --execute "SELECT Password FROM mysql.user where Host = 'localhost' and User = 'iiab_commenter';"`
+
+if [ "$rc" = "" ]; then
+  mysql --execute "CREATE USER iiab_commenter@localhost IDENTIFIED BY 'g0adm1n';"
+fi
+
+# Create database and table
+mysql < setup/comments-db.sql
+
+echo 'database created'
