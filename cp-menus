@@ -1,6 +1,10 @@
 #!/bin/bash
 
 WWWROOT=/var/www/html
+# maintain backwards compatibility
+if [ -f /etc/xsce/xsce.env ]; then
+  source /etc/xsce/xsce.env
+fi
 if [ -f /etc/iiab/iiab.env ]; then
   source /etc/iiab/iiab.env
 fi
