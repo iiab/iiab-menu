@@ -3,7 +3,7 @@
  "age_range": "adult",
  "rating": "2.0",
  "intended_use": "zim",
- "zim_name" : "wikipedia_fr_all",
+ "zim_name" : "wikisource_fr_all",
  "prereq_note": "",
  "zip_http_url": null,
  "title": "Wikisource en français",
