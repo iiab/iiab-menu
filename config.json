@@ -5,5 +5,7 @@
   "fr-kalitePort" : "8006",
   "calibrePort" : "8010",
   "apkBaseUrl" : "http://download.iiab.io/content/",
-  "mobilePortraitSize" : "48px"
+  "mobilePortraitSize" : "48px",
+  "poweroff_pin" : "1234",
+  "poweroff_pin_hash" : "81dc9bdb52d04dc20036dbd8313ed055"
 }
