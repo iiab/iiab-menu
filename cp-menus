@@ -27,6 +27,9 @@ rsync -av common $WWWROOT
 rsync -av menu-files $MENUDIR
 rsync -av samples $MENUDIR
 
+# refresh kiwix zim index
+iiab-make-kiwix-lib
+
 # copy iiab-meter service to web root
 cp -f menu-files/services/iiab_meter.php $WWWROOT
 
