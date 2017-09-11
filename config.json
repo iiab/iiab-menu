@@ -5,7 +5,7 @@
   "fr-kalitePort" : "8006",
   "calibrePort" : "8010",
   "apkBaseUrl" : "http://download.iiab.io/content/",
-  "apkLinkPhrase" : {"ar" : "", "en": "Download the offline app ", "es": "Descargar la aplicaci�n sin conexi�n"},
+  "apkLinkPhrase" : {"ar" : "إضغط هنا لتحميل", "en": "Download the offline app ", "es": "Descargar la aplicación sin conexión"},
   "mobilePortraitSize" : "48px",
   "poweroffPin" : "1234",
   "poweroffPinHash" : "81dc9bdb52d04dc20036dbd8313ed055"
