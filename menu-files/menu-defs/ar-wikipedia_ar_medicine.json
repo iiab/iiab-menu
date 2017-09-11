@@ -5,7 +5,8 @@
 "menu_item_name" : "ar-wikipedia_ar_medicine",
 "zim_name" : "wikipedia_ar_medicine",
 "title" : "وِيكيبيديا الطبية",
-"description" : "مَقالات عن الرعاية الصحية متوافرة بدون اتصال بالإنترنت في كل مكان وبشكل مجاني",
+"description" : ".دليل هسبريان الصحة هو مصدر غير ربحي للمعلومات الصحية و التثقيف الصحي لدعم الأفراد و المجتمعات في نضالهم لتحقيق الحق في الصحة. نحن نطور مواد سهلة القراءة يتم إنتاجها في العديد من اللغات",
 "extra_html" : "",
-"apk_file": "org.kiwix.wikipedia.ar.medicine.apk"
+"apk_file": "org.kiwix.wikipedia.ar.medicine.apk",
+"apk_file_size": "300M"
 }
