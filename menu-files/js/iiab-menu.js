@@ -256,8 +256,12 @@ function calcLink(href,module){
 	else
 		html+=module.title;
 	html+='</h2><p>' + module.description + '</p>';
-	if (module.hasOwnProperty("apk_file"))
-	html+='<p>Click here to download <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
+	if (module.hasOwnProperty("apk_file")){
+		if (menuConfig['apkLinkPhrase'].hasOwnProperty(module.lang))
+		  html+='<p>' + menuConfig['apkLinkPhrase'][module.lang] + ' <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
+	  else
+	  	html+='<p>Click here to download <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
+  }
 	consoleLog('href = ' + href);
 	html += '<div id="' + module.menu_id + '-htmlf" class="toggleExtraHtml"></div>'; // scaffold for extra html
 	html+='</div></div></div>';
