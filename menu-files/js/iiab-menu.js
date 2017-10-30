@@ -257,8 +257,11 @@ function calcLink(href,module){
 		html+=module.title;
 	html+='</h2><p>' + module.description + '</p>';
 	if (module.hasOwnProperty("apk_file")){
+		var sizeClause = '';
+		if (module.hasOwnProperty("apk_file_size")
+		  sizeClause = ' (' + module.apk_file + ')';
 		if (menuConfig['apkLinkPhrase'].hasOwnProperty(module.lang))
-		  html+='<p>' + menuConfig['apkLinkPhrase'][module.lang] + ' <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
+		  html+='<p>' + menuConfig['apkLinkPhrase'][module.lang] + ' <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + sizeClause + '</a></p>';
 	  else
 	  	html+='<p>Click here to download <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
   }
