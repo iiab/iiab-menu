@@ -261,7 +261,7 @@ function calcLink(href,module){
 		if (module.hasOwnProperty("apk_file_size"))
 		  sizeClause = ' (' + module.apk_file_size + ')';
 		if (menuConfig['apkLinkPhrase'].hasOwnProperty(module.lang))
-		  html+='<p>' + menuConfig['apkLinkPhrase'][module.lang] + ' <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + sizeClause + '</a></p>';
+		  html+='<p>' + menuConfig['apkLinkPhrase'][module.lang] + ' <span dir="ltr"><a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + sizeClause + '</a></span></p>';
 	  else
 	  	html+='<p>Click here to download <a href="' + apkBaseUrl + module.apk_file + '">' + module.apk_file + '</a></p>';
   }
