@@ -175,7 +175,12 @@ function procMenuItem(module) {
 }
 
 function calcZimLink(module){
-	var href = host + ':' + menuConfig.kiwixPort + '/' + zimVersions[module.zim_name] + '/';
+	// if kiwix_url is defined use it otherwise use port
+	var href = zimVersions[module.zim_name] + '/';
+	if ( menuConfig.hasOwnProperty('kiwixUrl'))
+    href = menuConfig.kiwixUrl + href;
+  else
+    href = host + ':' + menuConfig.kiwixPort + '/' + href;
 
 	var html = calcLink(href,module);
 	return html
