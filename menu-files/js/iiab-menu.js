@@ -213,13 +213,6 @@ function calcKaliteLink(module){
 }
 
 function calcCalibreLink(module){
-	var href = host + ':' + menuConfig.kalitePort;
-
-	var html = calcLink(href,module);
-	return html
-}
-
-function calcCalibreLink(module){
 	var href = host + ':' + menuConfig.calibrePort;
 
 	var html = calcLink(href,module);
