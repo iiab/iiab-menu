@@ -239,9 +239,14 @@ function calcLink(href,module){
 	// record href for extra html
 	menuDefs[module.menu_item_name]['href'] = href;
 
-	if (module.hasOwnProperty("start_url"))
-	startPage = href + '/' + module['start_url'];
-
+	if (module.hasOwnProperty("start_url")){
+	  if (startPage[startPage.length - 1] == '/')
+	    startPage = startPage.substr(0,startPage.length - 1); // strip final /
+	  if (module['start_url'][0] != '/')
+	    startPage = startPage + '/' + module['start_url'];
+	  else
+	  	startPage = startPage + module['start_url'];
+  }
 	var html = '<div style="display: table;"><div style="display: table-row;">';
 	html+='<div class="content-icon">';
 	if (href != null)
