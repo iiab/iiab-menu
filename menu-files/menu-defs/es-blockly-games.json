@@ -18,6 +18,6 @@
     "logo_url": "es-blockly_games.png",
     "rsync_url": "rsync://dev.worldpossible.org/rachelmods/es-blockly_games",
     "moddir": "es-blockly-games",
-    "start_url": "blockly-games/es/index.html",
+    "start_url": "blockly-games/index.html",
     "extra_html": "es-blockly-games.html"
 }
