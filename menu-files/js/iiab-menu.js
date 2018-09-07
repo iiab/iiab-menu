@@ -1,5 +1,5 @@
 // iiab-menu.js
-// copyright 2017 Tim Moody
+// copyright 2018 Tim Moody
 
 // debug
 
@@ -32,6 +32,7 @@ var defUrl = menuUrl + 'menu-defs/';
 var imageUrl = menuUrl + 'images/';
 var menuServicesUrl =  menuUrl + 'services/';
 var iiabMeterUrl = "/iiab_meter.php"
+var undefinedPageUrl = "/iiab-menu/menu-files/html/undefined.html"
 
 var host = 'http://' + window.location.hostname;
 var isMobile = detectMob();
@@ -176,12 +177,16 @@ function procMenuItem(module) {
 
 function calcZimLink(module){
 	// if kiwix_url is defined use it otherwise use port
-	var href = zimVersions[module.zim_name] + '/';
-	if ( menuConfig.hasOwnProperty('kiwixUrl'))
-    href = menuConfig.kiwixUrl + href;
+	var href = '';
+	if(typeof zimVersions[module.zim_name] != 'undefined'){
+	  href =  zimVersions[module.zim_name] + '/';
+  	if ( menuConfig.hasOwnProperty('kiwixUrl'))
+      href = menuConfig.kiwixUrl + href;
+    else
+      href = host + ':' + menuConfig.kiwixPort + '/' + href;
+    }
   else
-    href = host + ':' + menuConfig.kiwixPort + '/' + href;
-
+	  href = undefinedPageUrl; //not defined in zimVersions
 	var html = calcLink(href,module);
 	return html
 }
