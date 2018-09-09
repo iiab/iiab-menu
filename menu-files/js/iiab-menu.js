@@ -74,7 +74,8 @@ zimVersions = data;})
 
 // This is the main processing
 if (dynamicHtml){
-  $.when(scaffold, getZimVersions, getConfigJson).then(procMenu);
+  //$.when(scaffold, getZimVersions, getConfigJson).then(procMenu);
+  $.when(scaffold, getZimVersions, getConfigJson).always(procMenu); // ignore errors like kiwix not installed
   // create scaffolding for menu items
   var html = "";
   for (i = 0; i < menuItems.length; i++) {
@@ -186,7 +187,7 @@ function calcZimLink(module){
       href = host + ':' + menuConfig.kiwixPort + '/' + href;
     }
   else
-	  href = undefinedPageUrl; //not defined in zimVersions
+	  href = undefinedPageUrl; //not defined in zimVersions - but will not work if there is a startPage
 	var html = calcLink(href,module);
 	return html
 }
