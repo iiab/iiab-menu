@@ -1,4 +1,4 @@
-This repo contains a menuing system for Internet in a Box
+This repo contains a menuing system for Internet-in-a-Box *[that might be deprecated in 2019, as this repo is increasingly being rewritten & migrated to https://github.com/iiab/iiab-admin-console/tree/master/roles/js-menu]*
 
 ## IIAB Menu
 
